@@ -225,6 +225,9 @@
     .back-btn { font-size: 0.9em; background: none; border: none; color: var(--text-light); opacity: 0.7; cursor: pointer; margin-top: 15px; }
     .back-btn:hover { text-decoration: underline; opacity: 1; }
 </style>
+    <script 
+  src="https://www.paypal.com/sdk/js?client-id=BAAcf1kWjy3evwliNOOBGdnzoNyt081tt7QSQd28W91uuR4MaeCHhd2lSRJv9bXmL0krOvo8LgDSDCyRTk&components=hosted-buttons&disable-funding=venmo&currency=USD">
+</script>
 </head>
 <body class="theme-birthday">
 
@@ -246,7 +249,12 @@
             <button class="event-btn" onclick="selectEvent('wedding')"><span>💍</span>Wedding</button>
         </div>
     </div>
-
+<div id="paypal-container-DPYCDHJ5UEYDJ"></div>
+<script>
+  paypal.HostedButtons({
+    hostedButtonId: "DPYCDHJ5UEYDJ",
+  }).render("#paypal-container-DPYCDHJ5UEYDJ")
+</script>
     <!-- VIEW 2: Customization Form -->
     <div id="customization-form" class="view">
         <div class="form-container">
@@ -463,3 +471,4 @@
 </body>
 
 </html>
+
