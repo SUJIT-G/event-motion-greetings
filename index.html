@@ -249,24 +249,7 @@
             <button class="event-btn" onclick="selectEvent('wedding')"><span>💍</span>Wedding</button>
         </div>
     </div>
-<div id="paypal-container-DPYCDHJ5UEYDJ"></div>
-<script>
-  paypal.HostedButtons({
-    hostedButtonId: "DPYCDHJ5UEYDJ",
-  }).render("#paypal-container-DPYCDHJ5UEYDJ")
-</script>
-    <!-- VIEW 2: Customization Form -->
-    <div id="customization-form" class="view">
-        <div class="form-container">
-            <h1 id="form-title">Customize Greeting</h1>
-            <div class="input-group">
-                <label id="label-recipient" for="recipient">Recipient's Name</label>
-                <input type="text" id="recipient" class="input-field" placeholder="e.g., Jane Doe">
-            </div>
-            <div class="input-group">
-                <label for="sender">Your Name</label>
-                <input type="text" id="sender" class="input-field" placeholder="e.g., John Smith">
-            </div>
+
             <div class="input-group">
                 <label for="message">Your Message (Optional)</label>
                 <textarea id="message" class="input-field" rows="3" placeholder="Add a personal touch..."></textarea>
@@ -305,6 +288,24 @@
         </div>
         <button class="back-btn" onclick="resetAndGoHome()">🎉 Create Another Greeting</button>
     </div>
+    <div id="paypal-container-DPYCDHJ5UEYDJ"></div>
+<script>
+  paypal.HostedButtons({
+    hostedButtonId: "DPYCDHJ5UEYDJ",
+  }).render("#paypal-container-DPYCDHJ5UEYDJ")
+</script>
+    <!-- VIEW 2: Customization Form -->
+    <div id="customization-form" class="view">
+        <div class="form-container">
+            <h1 id="form-title">Customize Greeting</h1>
+            <div class="input-group">
+                <label id="label-recipient" for="recipient">Recipient's Name</label>
+                <input type="text" id="recipient" class="input-field" placeholder="e.g., Jane Doe">
+            </div>
+            <div class="input-group">
+                <label for="sender">Your Name</label>
+                <input type="text" id="sender" class="input-field" placeholder="e.g., John Smith">
+            </div>
 </main>
 
 <script>
@@ -471,4 +472,5 @@
 </body>
 
 </html>
+
 
