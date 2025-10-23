@@ -6,7 +6,7 @@ A beautiful, single-page web application for creating and sharing animated, even
 
 ---
 
-![Application Screenshot]([LINK_TO_A_SCREENSHOT_OR_GIF_OF_YOUR_APP_HERE])
+![Application Screenshot](https://sujit-g.github.io/event-motion-greetings/])
 *(Hint: Create a GIF of your app in action using a tool like Giphy Capture or ScreenToGif and upload it to the repo.)*
 
  🌟 Features
@@ -35,4 +35,5 @@ link: markdown - [![flower-petal1.png](https://i.postimg.cc/g0ysyzCq/flower-peta
 
 
 This project is open-source and available under the [MIT License](LICENSE).
+
 
