@@ -23,6 +23,7 @@ link: markdown - [![flower-petal1.png](https://i.postimg.cc/g0ysyzCq/flower-peta
 [![birthday-cake.png](https://i.postimg.cc/JhDYj5pN/birthday-cake.png)](https://postimg.cc/942BhZ50)
 [![balloons.png](https://i.postimg.cc/zXPfxTwm/balloons.png)](https://postimg.cc/sv7yXQ0K)
 [![diwali-sparkel.png](https://i.postimg.cc/m256VJMq/diwali-sparkel.png)](https://postimg.cc/0b7fytVd)
+[![greeting-gift-1.png](https://i.postimg.cc/ydRvQ8h4/greeting-gift-1.png)](https://postimg.cc/MMW7Xxrd)
  🛠️ Technologies Used
 
 -   **HTML5:** For the core structure and content.
@@ -34,3 +35,4 @@ link: markdown - [![flower-petal1.png](https://i.postimg.cc/g0ysyzCq/flower-peta
 
 
 This project is open-source and available under the [MIT License](LICENSE).
+
