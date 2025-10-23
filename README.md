@@ -22,6 +22,7 @@ A beautiful, single-page web application for creating and sharing animated, even
 link: markdown - [![flower-petal1.png](https://i.postimg.cc/g0ysyzCq/flower-petal1.png)](https://postimg.cc/yJd0sHYk)
 [![birthday-cake.png](https://i.postimg.cc/JhDYj5pN/birthday-cake.png)](https://postimg.cc/942BhZ50)
 [![balloons.png](https://i.postimg.cc/zXPfxTwm/balloons.png)](https://postimg.cc/sv7yXQ0K)
+[![diwali-sparkel.png](https://i.postimg.cc/m256VJMq/diwali-sparkel.png)](https://postimg.cc/0b7fytVd)
  🛠️ Technologies Used
 
 -   **HTML5:** For the core structure and content.
@@ -30,5 +31,6 @@ link: markdown - [![flower-petal1.png](https://i.postimg.cc/g0ysyzCq/flower-peta
 
 
  📜 License
+
 
 This project is open-source and available under the [MIT License](LICENSE).
