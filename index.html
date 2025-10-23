@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Motion Greetings ✨</title>
+    <meta name="description" content="Create and share beautiful animated greetings for birthdays, weddings, and more!">
+    
+    <!-- Social Media Sharing Meta Tags -->
+    <meta property="og:title" content="A Special Greeting For You! 💌">
+    <meta property="og:description" content="Someone has sent you a beautiful, animated greeting card. Click to view it!">
+    <meta property="og:image" content="https://i.imgur.com/vXI8t19.png"> <!-- A generic, attractive preview image -->
+    <meta property="og:type" content="website">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --text-light: #ffffff;
+            --text-dark: #333;
+            --shadow: rgba(0, 0, 0, 0.2);
+            --accent-gold: #FFD700;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-light);
+            text-align: center;
+            transition: background 0.8s ease;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- THEME STYLES --- */
+        body.theme-birthday {
+            background: #4158D0;
+            background: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+        }
+        body.theme-wedding {
+            background: #1e133a;
+            background: linear-gradient(to top, #3c2a6d, #1e133a);
+        }
+
+        /* --- MOTION BACKGROUNDS --- */
+        .motion-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+        body.theme-birthday .motion-background#bg-birthday,
+        body.theme-wedding .motion-background#bg-wedding {
+            opacity: 1;
+        }
+
+        /* Birthday Confetti */
+        #bg-birthday .confetti {
+            position: absolute; width: 10px; height: 20px; background-color: var(--accent-gold); opacity: 0.7; animation: confetti-fall 8s linear infinite;
+        }
+        #bg-birthday .confetti:nth-child(2n) { background-color: #f94144; animation-duration: 10s; }
+        #bg-birthday .confetti:nth-child(3n) { background-color: #f8961e; animation-duration: 6s; }
+        @keyframes confetti-fall { 0% { transform: translateY(-100px) rotateZ(0deg); } 100% { transform: translateY(100vh) rotateZ(720deg); } }
+
+        /* Wedding Bokeh */
+        @keyframes move-up { 100% { transform: translateY(-100vh) scale(0.5); } }
+        #bg-wedding .particle {
+            position: absolute; border-radius: 50%; background: rgba(255, 215, 0, 0.4); bottom: -100px; animation: move-up 10s linear infinite;
+        }
+
+        /* --- VIEW CONTAINERS --- */
+        .view {
+            width: 100%;
+            max-width: 550px;
+            padding: 20px;
+            display: none;
+            animation: fadeIn 0.8s ease;
+        }
+        .view.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        h1, h2 {
+            font-family: 'Playfair Display', serif; text-shadow: 0 2px 10px var(--shadow);
+        }
+        h1 { font-size: 2.8em; margin-bottom: 10px; }
+        h2 { font-size: 1.5em; opacity: 0.9; margin-bottom: 30px; }
+
+        /* --- EVENT SELECTOR VIEW --- */
+        .event-buttons { display: flex; gap: 20px; justify-content: center; }
+        .event-btn {
+            background: var(--card-bg); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 15px; padding: 30px 20px;
+            color: var(--text-light); font-size: 1.5em; font-weight: 600; cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease; width: 150px;
+        }
+        .event-btn:hover { transform: translateY(-10px); background: rgba(255, 255, 255, 0.2); }
+        .event-btn span { font-size: 2em; display: block; margin-bottom: 10px; }
+
+        /* --- FORM STYLES --- */
+        .form-container {
+            background: var(--card-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 20px;
+            padding: 30px; box-shadow: 0 8px 32px 0 var(--shadow);
+        }
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; margin-bottom: 8px; font-weight: 600; text-align: left; }
+        .input-field {
+            width: 100%; padding: 12px 15px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(0, 0, 0, 0.2); color: var(--text-light); font-size: 1em; font-family: 'Poppins', sans-serif;
+        }
+        .input-field:focus { outline: none; box-shadow: 0 0 10px var(--accent-gold); border-color: var(--accent-gold); }
+
+        .primary-btn {
+            background: var(--accent-gold); color: var(--text-dark); border: none; border-radius: 30px; padding: 12px 30px;
+            font-size: 1.1em; font-weight: 600; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; margin-top: 10px;
+        }
+        .primary-btn:hover { transform: scale(1.05); box-shadow: 0 0 20px var(--accent-gold); }
+
+        /* --- ENHANCED GREETING CARD --- */
+        .greeting-card {
+            background: var(--card-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 20px;
+            padding: 30px; box-shadow: 0 8px 32px 0 var(--shadow);
+            position: relative; /* Crucial for positioning elements inside */
+            overflow: hidden; /* Hides elements animating outside bounds */
+            min-height: 480px; /* Ensures space for elements */
+            display: flex; flex-direction: column; justify-content: center;
+        }
+        .card-content { position: relative; z-index: 2; } /* Keep text on top */
+        .greeting-card p { font-size: 1.2em; line-height: 1.7; margin: 15px 0; }
+        .greeting-card .recipient-name {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3em; color: var(--accent-gold); text-shadow: 0 0 15px var(--accent-gold);
+        }
+        .greeting-card .sender-name {
+            font-style: italic; margin-top: 25px; opacity: 0.9; font-size: 1.1em;
+        }
+        .share-buttons { margin-top: 30px; display: flex; flex-direction: column; align-items: center; gap: 15px; }
+
+        /* --- NEW: EVENT-SPECIFIC ELEMENT STYLES --- */
+        .event-elements {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 1;
+        }
+        
+        /* Birthday Cake */
+        .cake-icon {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            width: 100px;
+            height: 100px;
+            background: url('https://i.postimg.cc/JhDYj5pN/birthday-cake.png') no-repeat center center/contain;
+            transform: translateX(-50%) scale(0) translateY(100px);
+            opacity: 0;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s ease;
+        }
+        .cake-icon.visible {
+            transform: translateX(-50%) scale(1) translateY(0);
+            opacity: 1;
+        }
+
+        /* Balloons */
+        .balloon {
+            position: absolute;
+            bottom: -150px;
+            width: 70px;
+            height: 90px;
+            background: url('https://i.postimg.cc/zXPfxTwm/balloons.png') no-repeat center center/contain;
+            animation: float-up 10s linear infinite;
+        }
+        @keyframes float-up {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-120vh) rotate(15deg); }
+        }
+
+        /* Wedding Flowers */
+        .flower-petal {
+            position: absolute;
+            top: -50px;
+            width: 40px;
+            height: 40px;
+            background: url('https://i.postimg.cc/g0ysyzCq/flower-petal1.png') no-repeat center center/contain;
+            animation: flower-fall 12s linear infinite;
+        }
+        @keyframes flower-fall {
+            0% { transform: translateY(0) rotateZ(0deg); opacity: 1; }
+            100% { transform: translateY(120vh) rotateZ(360deg); opacity: 0; }
+        }
+
+        .back-btn { font-size: 0.9em; background: none; border: none; color: var(--text-light); opacity: 0.7; cursor: pointer; margin-top: 15px; }
+        .back-btn:hover { text-decoration: underline; opacity: 1; }
+    </style>
+</head>
+<body class="theme-birthday">
+
+    <!-- Motion Backgrounds -->
+    <div class="motion-background" id="bg-birthday"></div>
+    <div class="motion-background" id="bg-wedding"></div>
+
+    <main>
+        <!-- VIEW 1: Event Selection -->
+        <div id="event-selector" class="view active">
+            <h1>Create a Greeting</h1>
+            <h2>Choose an event to celebrate</h2>
+            <div class="event-buttons">
+                <button class="event-btn" onclick="selectEvent('birthday')"><span>🎂</span>Birthday</button>
+                <button class="event-btn" onclick="selectEvent('wedding')"><span>💍</span>Wedding</button>
+            </div>
+        </div>
+
+        <!-- VIEW 2: Customization Form -->
+        <div id="customization-form" class="view">
+            <div class="form-container">
+                <h1 id="form-title">Customize Greeting</h1>
+                <div class="input-group">
+                    <label id="label-recipient" for="recipient">Recipient's Name</label>
+                    <input type="text" id="recipient" class="input-field" placeholder="e.g., Jane Doe">
+                </div>
+                <div class="input-group">
+                    <label for="sender">Your Name</label>
+                    <input type="text" id="sender" class="input-field" placeholder="e.g., John Smith">
+                </div>
+                <div class="input-group">
+                    <label for="message">Your Message (Optional)</label>
+                    <textarea id="message" class="input-field" rows="3" placeholder="Add a personal touch..."></textarea>
+                </div>
+                <button class="primary-btn" onclick="generateGreeting()">Generate Card ✨</button>
+            </div>
+            <button class="back-btn" onclick="showView('event-selector')">← Back to event selection</button>
+        </div>
+
+        <!-- VIEW 3: Final Greeting Card -->
+        <div id="greeting-card-display" class="view">
+            <div class="greeting-card">
+                <!-- Container for animated elements -->
+                <div class="event-elements"></div>
+                
+                <div class="card-content">
+                    <p id="card-intro-text"></p>
+                    <h1 id="card-recipient" class="recipient-name"></h1>
+                    <p id="card-message"></p>
+                    <p id="card-sender" class="sender-name"></p>
+                </div>
+
+                <!-- Cake Icon (specifically for birthday) -->
+                <div class="cake-icon"></div>
+                
+                <div class="share-buttons">
+                    <button class="primary-btn" onclick="shareGreeting()">Share Greeting 📲</button>
+                    <span id="copy-feedback" style="font-size: 0.9em; opacity: 0; transition: opacity 0.3s;"></span>
+                </div>
+            </div>
+            <button class="back-btn" onclick="resetAndGoHome()">🎉 Create Another Greeting</button>
+        </div>
+    </main>
+
+    <script>
+        const THEMES = {
+            birthday: {
+                themeClass: 'theme-birthday',
+                formTitle: 'Birthday Greeting',
+                recipientLabel: "Birthday Person's Name",
+                cardIntro: 'A very happy birthday to you,',
+                defaultMessage: 'Wishing you a day that is as special and wonderful as you are. May all your dreams come true. Blow out the candles and make a wish!'
+            },
+            wedding: {
+                themeClass: 'theme-wedding',
+                formTitle: 'Wedding Wishes',
+                recipientLabel: "Couple's Names",
+                cardIntro: 'With heartfelt congratulations,',
+                defaultMessage: 'May the love you share today grow stronger as you grow old together. Wishing you a lifetime of joy, love, and beautiful adventures.'
+            }
+        };
+
+        let currentEvent = 'birthday';
+        let greetingData = {};
+
+        const elementsContainer = document.querySelector('.event-elements');
+        const cakeIcon = document.querySelector('.cake-icon');
+
+        // --- BACKGROUND ANIMATION ---
+        function createParticles(containerId, count, particleClass) {
+            const container = document.getElementById(containerId);
+            for (let i = 0; i < count; i++) {
+                const particle = document.createElement('div');
+                particle.className = particleClass;
+                const size = Math.random() * (particleClass === 'confetti' ? 10 : 50) + 5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${particleClass === 'confetti' ? size * 2 : size}px`;
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.animationDelay = `${Math.random() * 10}s`;
+                if(particleClass !== 'confetti') particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
+                container.appendChild(particle);
+            }
+        }
+        createParticles('bg-birthday', 70, 'confetti');
+        createParticles('bg-wedding', 40, 'particle');
+
+        // --- VIEW MANAGEMENT ---
+        function showView(viewId) {
+            document.querySelectorAll('.view').forEach(view => view.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+        }
+
+        function selectEvent(eventType) {
+            currentEvent = eventType;
+            const theme = THEMES[eventType];
+            document.body.className = theme.themeClass;
+            document.getElementById('form-title').innerText = theme.formTitle;
+            document.getElementById('label-recipient').innerText = theme.recipientLabel;
+            showView('customization-form');
+        }
+
+        // --- DYNAMIC ELEMENT CREATION ---
+        function clearEventElements() {
+            elementsContainer.innerHTML = '';
+            cakeIcon.classList.remove('visible');
+        }
+
+        function createBalloons(count) {
+            for (let i = 0; i < count; i++) {
+                const balloon = document.createElement('div');
+                balloon.className = 'balloon';
+                balloon.style.left = `${Math.random() * 80 + 10}%`;
+                balloon.style.animationDelay = `${Math.random() * 5}s`;
+                balloon.style.animationDuration = `${Math.random() * 5 + 8}s`;
+                elementsContainer.appendChild(balloon);
+            }
+        }
+        
+        function createFlowers(count) {
+             for (let i = 0; i < count; i++) {
+                const flower = document.createElement('div');
+                flower.className = 'flower-petal';
+                flower.style.left = `${Math.random() * 100}%`;
+                flower.style.animationDelay = `${Math.random() * 10}s`;
+                flower.style.animationDuration = `${Math.random() * 8 + 10}s`;
+                elementsContainer.appendChild(flower);
+            }
+        }
+
+        // --- GREETING GENERATION ---
+        function generateGreeting() {
+            const recipient = document.getElementById('recipient').value.trim();
+            const sender = document.getElementById('sender').value.trim();
+            let message = document.getElementById('message').value.trim();
+            if (!recipient || !sender) {
+                alert('Please fill in the recipient and your name.'); return;
+            }
+
+            const theme = THEMES[currentEvent];
+            if (!message) message = theme.defaultMessage;
+            greetingData = { recipient, sender, message, event: currentEvent };
+            
+            // Populate card
+            document.getElementById('card-intro-text').innerText = theme.cardIntro;
+            document.getElementById('card-recipient').innerText = recipient;
+            document.getElementById('card-message').innerText = message;
+            document.getElementById('card-sender').innerText = `With love, from ${sender}`;
+            
+            // Generate event elements
+            clearEventElements();
+            if (currentEvent === 'birthday') {
+                setTimeout(() => cakeIcon.classList.add('visible'), 200); // Small delay for effect
+                createBalloons(6);
+            } else if (currentEvent === 'wedding') {
+                createFlowers(12);
+            }
+            
+            showView('greeting-card-display');
+        }
+        
+        function resetAndGoHome() {
+            clearEventElements();
+            showView('event-selector');
+        }
+
+        // --- SHARING FUNCTIONALITY ---
+        async function shareGreeting() {
+            const title = `A special ${greetingData.event} greeting for ${greetingData.recipient}!`;
+            const text = `${greetingData.sender} has sent you ${greetingData.event} wishes! 💌\n\n"${greetingData.message}"\n\nView your animated card here:`;
+            const url = window.location.href; // In real app, this would be a unique generated URL
+            const shareData = { title, text, url };
+
+            if (navigator.share) {
+                try { await navigator.share(shareData); } catch (err) { console.error('Share failed:', err); }
+            } else {
+                navigator.clipboard.writeText(`${text} ${url}`).then(() => {
+                    const feedback = document.getElementById('copy-feedback');
+                    feedback.innerText = 'Link Copied to Clipboard!';
+                    feedback.style.opacity = 1;
+                    setTimeout(() => { feedback.style.opacity = 0; }, 2000);
+                });
+            }
+        }
+    </script>
+</body>
+</html>
