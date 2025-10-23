@@ -225,9 +225,6 @@
     .back-btn { font-size: 0.9em; background: none; border: none; color: var(--text-light); opacity: 0.7; cursor: pointer; margin-top: 15px; }
     .back-btn:hover { text-decoration: underline; opacity: 1; }
 </style>
-    <script 
-  src="https://www.paypal.com/sdk/js?client-id=BAAcf1kWjy3evwliNOOBGdnzoNyt081tt7QSQd28W91uuR4MaeCHhd2lSRJv9bXmL0krOvo8LgDSDCyRTk&components=hosted-buttons&disable-funding=venmo&currency=USD">
-</script>
 </head>
 <body class="theme-birthday">
 
@@ -258,7 +255,14 @@
         </div>
         <button class="back-btn" onclick="showView('event-selector')">← Back to event selection</button>
     </div>
-
+<div>
+  <style>.pp-DPYCDHJ5UEYDJ{text-align:center;border:none;border-radius:0.25rem;min-width:11.625rem;padding:0 2rem;height:2.625rem;font-weight:bold;background-color:#FFD140;color:#000000;font-family:"Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.25rem;cursor:pointer;}</style>
+  <form action="https://www.paypal.com/ncp/payment/DPYCDHJ5UEYDJ" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
+    <input class="pp-DPYCDHJ5UEYDJ" type="submit" value="Buy Me a Coffee!" />
+    <img src=https://www.paypalobjects.com/images/Debit_Credit_APM.svg alt="cards" />
+    <section style="font-size: 0.75rem;"> Powered by <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
+  </form>
+</div>
     <!-- VIEW 3: Final Greeting Card -->
     <div id="greeting-card-display" class="view">
         <div class="greeting-card">
@@ -472,5 +476,6 @@
 </body>
 
 </html>
+
 
 
